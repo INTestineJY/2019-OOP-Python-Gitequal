@@ -12,7 +12,7 @@
 
 ## 4. 목적
 울산과 제주의 공용 와이파이 위치 주소(울산: 2018년도, 제주:2017년도 기준)를 Open API를 통해 수집한 뒤, 이를 좌표로 변환시키는 Open API를 사용하여 얻어낸 좌표값들을 folium 라이브러리를 이용해 지도에 나타낸다. 또한 사용자가 이 지도를 사용하다가 새로 어떤 장소의 와이파이 비밀번호를 알아내거나 지도에 없는데 공용으로 사용할 수 있는 와이파이 장소를 알아낸다면 그 장소를 사용자가 지도상에 새로 추가할 수 있는 기능을 클래스로 구현한다.
-사용할 Open API들
+사용할 Open API들:
 1.https://www.data.go.kr/dataset/15013177/openapi.do
 2.https://www.data.go.kr/dataset/15012146/openapi.do
 3.https://www.vworld.kr/dev/v4dv_geocoderguide_s002.do
