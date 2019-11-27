@@ -11,11 +11,6 @@ class WIFI :
         self.coordinates = self.from_site.json()
         self.X = float(self.coordinates['EPSG_4326_X'])
         self.Y = float(self.coordinates['EPSG_4326_Y'])
-'''
-with open("wifidata.json", "r") as f:
-    json_data = json.load(f)
-    print(json.dumps(json_data))
-'''
 
 my_home = WIFI()
 my_school = WIFI()
