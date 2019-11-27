@@ -1,4 +1,6 @@
+'''
 import requests
+import json
 
 class WIFI :
     def __init__(self, address):
@@ -8,9 +10,19 @@ class WIFI :
         self.X = float(self.coordinates['EPSG_4326_X'])
         self.Y = float(self.coordinates['EPSG_4326_Y'])
 
+with open("wifidata.json", "r") as f:
+    json_data = json.load(f)
+    print(json.dumps(json_data))
+
+
 my_home = WIFI("서울특별시 노원구 노원로 62(공릉동, 효성화운트빌)")
 my_school = WIFI("세종특별자치시 달빛1로 265(아름동 산8)")
 
 print(my_home.X)
 print(my_home.Y)
+'''
 
+import json
+
+with open('wifidata.json', 'rb') as f:
+    root = json.load(f)
