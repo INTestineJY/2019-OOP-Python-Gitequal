@@ -1,3 +1,4 @@
+'''
 import requests
 import json
 
@@ -20,8 +21,9 @@ print(my_home.X)
 print(my_home.Y)
 '''
 
-import json
+import csv
 
-with open('wifidata.json', ) as f:
-    root = json.load(f)
-'''
+free_wifi = open('freewifi.csv', 'r', encoding= 'cp949')
+rdr = csv.reader(free_wifi)
+mywifi = [row for idx, row in enumerate(rdr) if idx in range(1, 3)]
+print(mywifi)
