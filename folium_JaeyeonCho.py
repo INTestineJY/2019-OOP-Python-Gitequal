@@ -19,3 +19,7 @@ html_file='map.html'
 webbrowser.open(html_file)
 
 folium.Map().get_root().render()
+
+
+#https://dailyheumsi.tistory.com/85
+#folium 튜토리얼
