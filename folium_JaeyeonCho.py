@@ -8,9 +8,9 @@ print(folium.__version__)
 
 print("="*20)
 
-m = folium.Map([45, 3], zoom_start=4)
+m = folium.Map([36.6, 128], zoom_start=8)
 
-folium.Marker([45.01, 3.01], popup='여긴 어디').add_to(m)
+#folium.Marker([45.01, 3.01], popup='여긴 어디').add_to(m)
 
 m.save("map.html")
 
