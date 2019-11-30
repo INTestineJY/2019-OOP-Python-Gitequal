@@ -14,3 +14,10 @@
 #folium 이용해 map에 핀 추가_재연
 
 #HTML로 저장 후 gui로 preprocess done 메세지 출력_재연
+
+import csv
+
+free_wifi = open('freewifi.csv', 'r', encoding= 'cp949')
+rdr = csv.reader(free_wifi)
+mywifi = [row for idx, row in enumerate(rdr) if idx in range(1, 3)]
+print(mywifi)
