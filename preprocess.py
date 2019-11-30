@@ -16,6 +16,7 @@
 #HTML로 저장 후 gui로 preprocess done 메세지 출력_재연
 
 import csv
+<<<<<<< HEAD
 
 free_wifi = open('freewifi.csv', 'r', encoding= 'cp949')
 rdr = csv.reader(free_wifi)
@@ -26,3 +27,30 @@ for wifi in mywifi:
     wifiName=wifi[0]
     wifiLocation=wifi[8]
 
+=======
+import requests
+
+class free_wifi :
+    def __init__(self, name, latitude, longitude):
+        self.name = name
+        self.lati = latitude #lati는 위도
+        self.longi = longitude #longi는 경도
+
+    def juso_to_coor(self, address): #도로명 주소 넣으면 위도 경도 찾아주는 거긴 한데 일단 안 쓴 함수
+        self.from_site = requests.get(
+            'http://apis.vworld.kr/new2coord.do?q=' + address + '&apiKey=4BC8BA59-D75D-3BF2-AF93-A0730B4E148E&domain=http://map.vworld.kr/&output=json')
+        self.coordinates = self.from_site.json()
+        self.X = float(self.coordinates['EPSG_4326_X'])
+        self.Y = float(self.coordinates['EPSG_4326_Y'])
+
+wifi_file = open('freewifi.csv', 'r', encoding= 'cp949')
+rdr = csv.reader(wifi_file)
+mywifi = [row for idx, row in enumerate(rdr) if idx in range(1, 25419)]
+
+wifi_list = []
+for wifi in mywifi :
+    wifi_list.append(free_wifi(wifi[0], wifi[12], wifi[13]))
+#wifi_list[csv 파일에서의 순서(0부터)].name, lati, longi로 각각 이름, 위도, 경도 인식 가능
+
+print(wifi_list[0].name, wifi_list[0].lati, wifi_list[0].longi) #사용 예시
+>>>>>>> 52b6a7e2c95d697f76f7205d3d0526b5722fb653
