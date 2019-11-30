@@ -16,19 +16,9 @@
 #HTML로 저장 후 gui로 preprocess done 메세지 출력_재연
 
 import csv
-<<<<<<< HEAD
-
-free_wifi = open('freewifi.csv', 'r', encoding= 'cp949')
-rdr = csv.reader(free_wifi)
-mywifi = [row for idx, row in enumerate(rdr) if idx in range(1, 3)]
-
-
-for wifi in mywifi:
-    wifiName=wifi[0]
-    wifiLocation=wifi[8]
-
-=======
+import folium
 import requests
+import webbrowser
 
 class free_wifi :
     def __init__(self, name, latitude, longitude):
@@ -52,5 +42,17 @@ for wifi in mywifi :
     wifi_list.append(free_wifi(wifi[0], wifi[12], wifi[13]))
 #wifi_list[csv 파일에서의 순서(0부터)].name, lati, longi로 각각 이름, 위도, 경도 인식 가능
 
+m = folium.Map([36.6, 128], zoom_start=8)
+
+for wifi in wifi_list:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(m)
+
+
+
+m.save("map.html")
+
+html_file='map.html'
+
+webbrowser.open(html_file)
+
 print(wifi_list[0].name, wifi_list[0].lati, wifi_list[0].longi) #사용 예시
->>>>>>> 52b6a7e2c95d697f76f7205d3d0526b5722fb653
