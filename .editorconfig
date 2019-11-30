@@ -1,0 +1,4 @@
+root = true
+
+[Paths]
+Plugins = .
