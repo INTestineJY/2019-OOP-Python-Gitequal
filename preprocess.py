@@ -22,12 +22,12 @@ from collections import OrderedDict
 file_data = OrderedDict()
 
 class free_wifi :
-    def __init__(self, name, latitude, longitude):
+    def __init__(self, name, latitude = 0, longitude = 0):
         self.name = name
-        self.lati = latitude #lati는 위도
-        self.longi = longitude #longi는 경도
+        self.lati = latitude #lati는 위도 default 0
+        self.longi = longitude #longi는 경도 default 0
 
-    def juso_to_coor(self, address): #도로명 주소 넣으면 위도 경도 찾아주는 거긴 한데 일단 안 쓴 코드
+    def juso_to_coor(self, address): #도로명 주소 넣으면 위도 경도 찾아주는 거긴 한데 일단 안 쓴 코드... 나중에 쓸 수 있으면 쓰자
         self.from_site = requests.get(
             'http://apis.vworld.kr/new2coord.do?q=' + address + '&apiKey=4BC8BA59-D75D-3BF2-AF93-A0730B4E148E&domain=http://map.vworld.kr/&output=json')
         self.coordinates = self.from_site.json()
@@ -93,6 +93,7 @@ region_list = []
 
 def region_add(kr_name, en_name, region_wifi, region_map):
     region_list.append(regions(kr_name, en_name, region_wifi, region_map))
+#kr_name = 한글 이름, en_name = 영어 이름, region_wifi = 지역 와이파이 리스트, region_map = 지역 지도
 
 region_add('서울특별시', 'seoul', seoul_wifi, seoul_map)
 region_add('경기도', 'gyeonggi', gyeonggi_wifi, gyeonggi_map)
@@ -179,6 +180,11 @@ for wifi in mywifi :
 for region in region_list :
     for wifi in region.wifi_list:
         folium.Marker([wifi.lati, wifi.longi], popup = wifi.name).add_to(region.wifi_map)
+
+
+for region in region_list :
+    region.wifi_map.save("map/"+region.en_name+'_map.html')
+
 '''
 for wifi in seoul_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(seoul_map)
@@ -232,8 +238,6 @@ for wifi in daegu_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(daegu_map)
 '''
 
-for region in region_list :
-    region.wifi_map.save("map/"+region.en_name+'_map.html')
 '''
 seoul_map.save("map/seoul_map.html")
 gyeonggi_map.save("map/gyeonggi_map.html")
