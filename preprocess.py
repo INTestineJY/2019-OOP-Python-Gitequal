@@ -44,6 +44,13 @@ gyeongbuk_wifi = []
 gyeongnam_wifi = []
 jeju_wifi = []
 sejong_wifi = []
+gangwon_wifi = []
+busan_wifi = []
+ulsan_wifi = []
+daegu_wifi = []
+incheon_wifi = []
+gwangju_wifi = []
+daejeon_wifi = []
 
 def wifi_add(check, wifi_list, wifi):
     if wifi[2] == check :
@@ -59,7 +66,14 @@ for wifi in mywifi :
     wifi_add('경상북도', gyeongbuk_wifi, wifi)
     wifi_add('경상남도', gyeongnam_wifi, wifi)
     wifi_add('제주도', jeju_wifi, wifi)
-    wifi_add('세종특별자치')
+    wifi_add('세종특별자치시', sejong_wifi, wifi)
+    wifi_add('강원도', gangwon_wifi, wifi)
+    wifi_add('부산광역시', busan_wifi, wifi)
+    wifi_add('울산광역시', ulsan_wifi, wifi)
+    wifi_add('대전광역시', daejeon_wifi, wifi)
+    wifi_add('광주광역시', gwangju_wifi, wifi)
+    wifi_add('인천광역시', incheon_wifi, wifi)
+    wifi_add('대구광역시', daegu_wifi, wifi)
 
     '''
     if wifi[2] == '서울특별시' :
