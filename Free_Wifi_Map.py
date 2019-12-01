@@ -75,4 +75,5 @@ if __name__ == '__main__':
     ex = MyApp()
     app.exec()
 
+
 webbrowser.open(html_dict[Text])
