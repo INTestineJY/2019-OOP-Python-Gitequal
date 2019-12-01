@@ -5,15 +5,15 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtCore import Qt
 
-html_dict = {'033': "map/gangwon_map.html", '031': "map/gyeonggi_map.html",
-             '043': "map/chungbuk_map.html", '041': "map/chungnam_map.html",
-             '063': "map/jeonbuk_map.html", '054': "map/gyeongbuk_map.html",
-             '055': "map/gyeongnam_map.html", '061': "map/jeonnam_map.html",
-             '02': "map/seoul_map.html", '044': "map/sejong_map.html",
-             '051': "map/busan_map.html", '052': "map/ulsan_map.html",
-             '032': "map/incheon_map.html", '042': "map/daejeon_map.html",
-             '053': "map/daegu_map.html", '062': "map/gwangju_map.html",
-             '064': "map/jeju_map.html"}
+html_dict = {'033': "gangwon_map.html", '031': "gyeonggi_map.html",
+             '043': "chungbuk_map.html", '041': "chungnam_map.html",
+             '063': "jeonbuk_map.html", '054': "gyeongbuk_map.html",
+             '055': "gyeongnam_map.html", '061': "jeonnam_map.html",
+             '02': "seoul_map.html", '044': "sejong_map.html",
+             '051': "busan_map.html", '052': "ulsan_map.html",
+             '032': "incheon_map.html", '042': "daejeon_map.html",
+             '053': "daegu_map.html", '062': "gwangju_map.html",
+             '064': "jeju_map.html"}
 
 Text = ""
 
