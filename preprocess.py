@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #preprocess program
 
 #freewifi.csv open_수영
@@ -15,8 +17,6 @@
 import csv
 import folium
 import requests
-import webbrowser
-import json
 from collections import OrderedDict
 
 file_data = OrderedDict()
@@ -35,10 +35,10 @@ class free_wifi :
         self.Y = float(self.coordinates['EPSG_4326_Y'])
 
 class regions :
-    def __init__(self, kr_region, en_region, wifi_list, map_list):
+    def __init__(self, kr_region, en_region, wifilist, map_list):
         self.kr_name = kr_region
         self.en_name = en_region
-        self.wifi_list = wifi_list
+        self.wifilist = wifilist
         self.wifi_map = map_list
 
 wifi_file = open('freewifi.csv', 'r', encoding= 'cp949')
@@ -188,52 +188,36 @@ for region in region_list :
 '''
 for wifi in seoul_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(seoul_map)
-
 for wifi in gyeonggi_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeonggi_map)
-
 for wifi in chungbuk_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(chungbuk_map)
-
 for wifi in chungnam_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(chungnam_map)
-
 for wifi in jeonbuk_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeonbuk_map)
-
 for wifi in jeonnam_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeonnam_map)
-
 for wifi in gyeongbuk_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeongbuk_map)
-
 for wifi in gyeongnam_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeongnam_map)
-
 for wifi in jeju_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeju_map)
-
 for wifi in sejong_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(sejong_map)
-
 for wifi in kangwon_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(kangwon_map)
-
 for wifi in busan_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(busan_map)
-
 for wifi in ulsan_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(ulsan_map)
-
 for wifi in daejeon_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(daejeon_map)
-
 for wifi in gwangju_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gwangju_map)
-
 for wifi in incheon_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(incheon_map)
-
 for wifi in daegu_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(daegu_map)
 '''
@@ -262,9 +246,7 @@ file_data["map_dict"] = {'kangwon':kangwon_map, 'gyeonggi':gyeonggi_map, 'chungb
                          'jeonbuk':jeonbuk_map, 'gyeongbuk':gyeongbuk_map, 'gyeongnam':gyeongnam_map, 'jeonnam':jeonnam_map,
                          'seoul':seoul_map, 'sejong':sejong_map, 'busan':busan_map, 'ulsan':ulsan_map, 'incheon':incheon_map,
                          'daejeon':daejeon_map, 'daegu':daegu_map, 'gwangju':gwangju_map, 'jeju':jeju_map}
-
 print(json.dumps(file_data, ensure_ascii=False, indent="\t"))
-
 with open('data.json','w', encoding="utf-8") as make_file:
     json.dump(file_data, make_file, ensure_ascii=False, indent="\t")
 '''
@@ -272,8 +254,3 @@ with open('data.json','w', encoding="utf-8") as make_file:
 #           ['jeonbuk',jeonbuk_map],   ['gyeongbuk',gyeongbuk_map],   ['gyeongnam',gyeongnam_map],   ['jeonnam',jeonnam_map],
 #           ['seoul',seoul_map],   ['sejong',sejong_map],   ['busan',busan_map],   ['ulsan',ulsan_map],   ['incheon',incheon_map],
 #           ['daejeon',daejeon_map],   ['daegu',daegu_map],   ['gwangju',gwangju_map],   ['jeju',jeju_map]]
-
-
-
-
-
