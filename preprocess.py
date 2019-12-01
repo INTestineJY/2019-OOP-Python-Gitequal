@@ -16,6 +16,10 @@ import csv
 import folium
 import requests
 import webbrowser
+import json
+from collections import OrderedDict
+
+file_data = OrderedDict()
 
 class free_wifi :
     def __init__(self, name, latitude, longitude):
@@ -206,10 +210,15 @@ gwangju_map.save("map/gwangju_map.html")
 incheon_map.save("map/incheon_map.html")
 daegu_map.save("map/daegu_map.html")
 
-map_dict=[['gangwon',gangwon_map],   ['gyeonggi',gyeonggi_map],   ['chungbuk',chungbuk_map],   ['chungnam',chungnam_map],
-          ['jeonbuk',jeonbuk_map],   ['gyeongbuk',gyeongbuk_map],   ['gyeongnam',gyeongnam_map],   ['jeonnam',jeonnam_map],
-          ['seoul',seoul_map],   ['sejong',sejong_map],   ['busan',busan_map],   ['ulsan',ulsan_map],   ['incheon',incheon_map],
-          ['daejeon',daejeon_map],   ['daegu',daegu_map],   ['gwangju',gwangju_map],   ['jeju',jeju_map]]
+file_data["map_dict"] = {'gangwon':gangwon_map, 'gyeonggi':gyeonggi_map, 'chungbuk':chungbuk_map, 'chungnam':chungnam_map,
+                         'jeonbuk':jeonbuk_map, 'gyeongbuk':gyeongbuk_map, 'gyeongnam':gyeongnam_map, 'jeonnam':jeonnam_map,
+                         'seoul':seoul_map, 'sejong':sejong_map, 'busan':busan_map, 'ulsan':ulsan_map, 'incheon':incheon_map,
+                         'daejeon':daejeon_map, 'daegu':daegu_map, 'gwangju':gwangju_map, 'jeju':jeju_map}
+
+# map_dict=[['gangwon',gangwon_map],   ['gyeonggi',gyeonggi_map],   ['chungbuk',chungbuk_map],   ['chungnam',chungnam_map],
+#           ['jeonbuk',jeonbuk_map],   ['gyeongbuk',gyeongbuk_map],   ['gyeongnam',gyeongnam_map],   ['jeonnam',jeonnam_map],
+#           ['seoul',seoul_map],   ['sejong',sejong_map],   ['busan',busan_map],   ['ulsan',ulsan_map],   ['incheon',incheon_map],
+#           ['daejeon',daejeon_map],   ['daegu',daegu_map],   ['gwangju',gwangju_map],   ['jeju',jeju_map]]
 
 
 
