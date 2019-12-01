@@ -70,17 +70,68 @@ for wifi in mywifi :
         sejong_wifi.append(free_wifi(wifi[0], wifi[12], wifi[13]))
 #wifi_list[csv 파일에서의 순서(0부터)].name, lati, longi로 각각 이름, 위도, 경도 인식 가능
 
-m = folium.Map([36.6, 128], zoom_start=8)
+seoul_map = folium.Map([36.6, 128], zoom_start=8)
+gyeonggi_map = folium.Map([36.6, 128], zoom_start=8)
+chungbuk_map = folium.Map([36.6, 128], zoom_start=8)
+chungnam_map = folium.Map([36.6, 128], zoom_start=8)
+jeonbuk_map = folium.Map([36.6, 128], zoom_start=8)
+jeonnam_map = folium.Map([36.6, 128], zoom_start=8)
+gyeongbuk_map = folium.Map([36.6, 128], zoom_start=8)
+gyeongnam_map = folium.Map([36.6, 128], zoom_start=8)
+jeju_map = folium.Map([36.6, 128], zoom_start=8)
+sejong_map = folium.Map([36.6, 128], zoom_start=8)
 
-for wifi in wifi_list:
-    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(m)
 
 
+# for wifi in wifi_list:
+#     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(m)
 
-m.save("map.html")
 
-html_file='map.html'
+for wifi in seoul_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(seoul_map)
+
+for wifi in gyeonggi_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeonggi_map)
+
+for wifi in chungbuk_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(chungbuk_map)
+
+for wifi in chungnam_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(chungnam_map)
+
+for wifi in jeonbuk_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeonbuk_map)
+
+for wifi in jeonnam_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeonnam_map)
+
+for wifi in gyeongbuk_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeongbuk_map)
+
+for wifi in gyeongnam_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeongnam_map)
+
+for wifi in jeju_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeju_map)
+
+for wifi in sejong_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(sejong_map)
+
+
+seoul_map.save("map/seoul_map.html")
+gyeonggi_map.save("map/gyeonggi_map.html")
+chungbuk_map.save("map/chungbuk_map.html")
+chungnam_map.save("map/chungnam_map.html")
+jeonbuk_map.save("map/jeonbuk_map.html")
+jeonnam_map.save("map/jeonnam_map.html")
+gyeongbuk_map.save("map/gyeongbuk_map.html")
+gyeongnam_map.save("map/gyeongnam_map.html")
+jeju_map.save("map/jeju_map.html")
+sejong_map.save("map/sejong_map.html")
+
+html_file='sejong_map.html'
+
+
 
 webbrowser.open(html_file)
 
-print(wifi_list[0].name, wifi_list[0].lati, wifi_list[0].longi) #사용 예시
