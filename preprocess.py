@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 #preprocess program
 
 #freewifi.csv open_수영
@@ -17,39 +15,25 @@
 import csv
 import folium
 import requests
-from collections import OrderedDict
-
-file_data = OrderedDict()
+import webbrowser
 
 class free_wifi :
     def __init__(self, name, latitude, longitude):
         self.name = name
-        self.lati = latitude #lati는 위도 default 0
-        self.longi = longitude #longi는 경도 default 0
+        self.lati = latitude #lati는 위도
+        self.longi = longitude #longi는 경도
 
-    def juso_to_coor(self, address): #도로명 주소 넣으면 위도 경도 찾아주는 거긴 한데 일단 안 쓴 코드... 나중에 쓸 수 있으면 쓰자
+    def juso_to_coor(self, address): #도로명 주소 넣으면 위도 경도 찾아주는 거긴 한데 일단 안 쓴 코드
         self.from_site = requests.get(
             'http://apis.vworld.kr/new2coord.do?q=' + address + '&apiKey=4BC8BA59-D75D-3BF2-AF93-A0730B4E148E&domain=http://map.vworld.kr/&output=json')
         self.coordinates = self.from_site.json()
         self.X = float(self.coordinates['EPSG_4326_X'])
         self.Y = float(self.coordinates['EPSG_4326_Y'])
 
-class regions :
-    def __init__(self, kr_region, en_region, wifilist, map_list):
-        self.kr_name = kr_region
-        self.en_name = en_region
-        self.wifilist = wifilist
-        self.wifi_map = map_list
-
 wifi_file = open('freewifi.csv', 'r', encoding= 'cp949')
 rdr = csv.reader(wifi_file)
 mywifi = [row for idx, row in enumerate(rdr) if idx in range(1, 25419)]
 
-def wifi_add(check, wifi_list, wifi):
-    if wifi[2] == check :
-        wifi_list.append(free_wifi(wifi[0], wifi[12], wifi[13]))
-
-#지역별 wifi 리스트 선언
 seoul_wifi = []
 gyeonggi_wifi = []
 chungbuk_wifi = []
@@ -60,7 +44,7 @@ gyeongbuk_wifi = []
 gyeongnam_wifi = []
 jeju_wifi = []
 sejong_wifi = []
-kangwon_wifi = []
+gangwon_wifi = []
 busan_wifi = []
 ulsan_wifi = []
 daegu_wifi = []
@@ -68,56 +52,11 @@ incheon_wifi = []
 gwangju_wifi = []
 daejeon_wifi = []
 
-#지역별 map 선언
-seoul_map = folium.Map([37.540705, 126.956764], zoom_start=11)
-gyeonggi_map = folium.Map([37.567167, 127.190292], zoom_start=9)
-chungbuk_map = folium.Map([36.628503, 127.929344], zoom_start=9)
-chungnam_map = folium.Map([36.557229, 126.779757], zoom_start=9)
-jeonbuk_map = folium.Map([35.716705, 127.144185], zoom_start=9)
-jeonnam_map = folium.Map([34.819400, 126.893113], zoom_start=9)
-gyeongbuk_map = folium.Map([36.248647, 128.664734], zoom_start=9)
-gyeongnam_map = folium.Map([35.259787, 128.664734], zoom_start=9)
-jeju_map = folium.Map([33.364805, 126.542671], zoom_start=11)
-sejong_map = folium.Map([36.5, 127.26667], zoom_start=11)
-kangwon_map = folium.Map([37.555837, 128.209315], zoom_start=9)
-busan_map = folium.Map([35.198362, 129.053922], zoom_start=11)
-ulsan_map = folium.Map([35.519301, 129.239078], zoom_start=11)
-daejeon_map = folium.Map([36.321655, 127.378953], zoom_start=11)
-gwangju_map = folium.Map([35.126033, 126.831302], zoom_start=11)
-incheon_map = folium.Map([37.469221, 126.573234], zoom_start=11)
-daegu_map = folium.Map([35.798838, 128.583052], zoom_start=11)
-
-#region = [['서울특별시', 'seoul', seoul_wifi, seoul_map], ['경기도', 'gyeonggi', gyeonggi_wifi, gyeonggi_map], ['충청북도', 'chungbuk', chungbuk_wifi, chungbuk_map], ['충청남도', 'chungnam', chungnam_wifi, chungnam_map], ['전라남도', 'jeonnam', jeonnam_wifi, jeonnam_map], ['전라북도', 'jeonbuk', jeonbuk_wifi, jeonbuk_map], ['경상북도', gyeongbuk_wifi, gyeongbuk_map], ['경상남도', gyeongnam_wifi, gyeongnam_map], ['제주특별자치도', jeju_wifi, jeju_map], ['세종특별자치시', sejong_wifi, sejong_map], ['강원도', kangwon_wifi, kangwon_map], ['인천광역시', incheon_wifi, incheon_map], ['광주광역시', gwangju_wifi, gwangju_map], ['울산광역시', ulsan_wifi, ulsan_map], ['대구광역시', daegu_wifi, daegu_map], ['대전광역시', daejeon_wifi, daejeon_map], ['부산광역시', busan_wifi, busan_map]]
-
-region_list = []
-
-def region_add(kr_name, en_name, region_wifi, region_map):
-    region_list.append(regions(kr_name, en_name, region_wifi, region_map))
-#kr_name = 한글 이름, en_name = 영어 이름, region_wifi = 지역 와이파이 리스트, region_map = 지역 지도
-
-region_add('서울특별시', 'seoul', seoul_wifi, seoul_map)
-region_add('경기도', 'gyeonggi', gyeonggi_wifi, gyeonggi_map)
-region_add('충청북도', 'chungbuk', chungbuk_wifi, chungbuk_map)
-region_add('충청남도', 'chungnam', chungnam_wifi, chungnam_map)
-region_add('전라북도', 'jeonbuk', jeonbuk_wifi, jeonbuk_map)
-region_add('전라남도', 'jeonnam', jeonnam_wifi, jeonnam_map)
-region_add('경상북도', 'gyeongbuk', gyeongbuk_wifi, gyeongbuk_map)
-region_add('경상남도', 'gyeongnam', gyeongnam_wifi, gyeongnam_map)
-region_add('강원도', 'kangwon', kangwon_wifi, kangwon_map)
-region_add('세종특별자치시', 'sejong', sejong_wifi, sejong_map)
-region_add('인천광역시', 'incheon', incheon_wifi, incheon_map)
-region_add('광주광역시', 'gwangju', gwangju_wifi, gwangju_map)
-region_add('울산광역시', 'ulsan', ulsan_wifi, ulsan_map)
-region_add('부산광역시', 'busan', busan_wifi, busan_map)
-region_add('대전광역시', 'daejeon', daejeon_wifi, daejeon_map)
-region_add('대구광역시', 'daegu', daegu_wifi, daegu_map)
-region_add('제주특별자치시', 'jeju', jeju_wifi, jeju_map)
+def wifi_add(check, wifi_list, wifi):
+    if wifi[2] == check :
+        wifi_list.append(free_wifi(wifi[0], wifi[12], wifi[13]))
 
 for wifi in mywifi :
-    for region in region_list :
-        wifi_add(region.kr_name, region.en_name, wifi)
-
-    '''
     wifi_add('서울특별시', seoul_wifi, wifi)
     wifi_add('경기도', gyeonggi_wifi, wifi)
     wifi_add('충청북도', chungbuk_wifi, wifi)
@@ -128,14 +67,15 @@ for wifi in mywifi :
     wifi_add('경상남도', gyeongnam_wifi, wifi)
     wifi_add('제주특별자치도', jeju_wifi, wifi)
     wifi_add('세종특별자치시', sejong_wifi, wifi)
-    wifi_add('강원도', kangwon_wifi, wifi)
+
+    wifi_add('강원도', gangwon_wifi, wifi)
     wifi_add('부산광역시', busan_wifi, wifi)
     wifi_add('울산광역시', ulsan_wifi, wifi)
     wifi_add('대전광역시', daejeon_wifi, wifi)
     wifi_add('광주광역시', gwangju_wifi, wifi)
     wifi_add('인천광역시', incheon_wifi, wifi)
     wifi_add('대구광역시', daegu_wifi, wifi)
-    '''
+
     '''
     if wifi[2] == '서울특별시' :
         seoul_wifi.append(free_wifi(wifi[0], wifi[12], wifi[13]))
@@ -161,7 +101,7 @@ for wifi in mywifi :
 '''
 
 
-#     wifi_add('강원도', kangwon_wifi, wifi)
+#     wifi_add('강원도', gangwon_wifi, wifi)
 #     wifi_add('부산광역시', busan_wifi, wifi)
 #     wifi_add('울산광역시', ulsan_wifi, wifi)
 #     wifi_add('대전광역시', daejeon_wifi, wifi)
@@ -170,6 +110,23 @@ for wifi in mywifi :
 #     wifi_add('대구광역시', daegu_wifi, wifi)
 
 
+seoul_map = folium.Map([37.540705, 126.956764], zoom_start=11)
+gyeonggi_map = folium.Map([37.567167, 127.190292], zoom_start=9)
+chungbuk_map = folium.Map([36.628503, 127.929344], zoom_start=9)
+chungnam_map = folium.Map([36.557229, 126.779757], zoom_start=9)
+jeonbuk_map = folium.Map([35.716705, 127.144185], zoom_start=9)
+jeonnam_map = folium.Map([34.819400, 126.893113], zoom_start=9)
+gyeongbuk_map = folium.Map([36.248647, 128.664734], zoom_start=9)
+gyeongnam_map = folium.Map([35.259787, 128.664734], zoom_start=9)
+jeju_map = folium.Map([33.364805, 126.542671], zoom_start=11)
+sejong_map = folium.Map([36.5, 127.26667], zoom_start=11)
+gangwon_map = folium.Map([37.555837, 128.209315], zoom_start=9)
+busan_map = folium.Map([35.198362, 129.053922], zoom_start=11)
+ulsan_map = folium.Map([35.519301, 129.239078], zoom_start=11)
+daejeon_map = folium.Map([36.321655, 127.378953], zoom_start=11)
+gwangju_map = folium.Map([35.126033, 126.831302], zoom_start=11)
+incheon_map = folium.Map([37.469221, 126.573234], zoom_start=11)
+daegu_map = folium.Map([35.798838, 128.583052], zoom_start=11)
 
 
 
@@ -177,52 +134,60 @@ for wifi in mywifi :
 #     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(m)
 
 
-for region in region_list :
-    for wifi in region.wifi_list:
-        folium.Marker([wifi.lati, wifi.longi], popup = wifi.name).add_to(region.wifi_map)
-
-
-for region in region_list :
-    region.wifi_map.save("map/"+region.en_name+'_map.html')
-
-'''
 for wifi in seoul_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(seoul_map)
+
 for wifi in gyeonggi_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeonggi_map)
+
 for wifi in chungbuk_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(chungbuk_map)
+
 for wifi in chungnam_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(chungnam_map)
+
 for wifi in jeonbuk_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeonbuk_map)
+
 for wifi in jeonnam_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeonnam_map)
+
 for wifi in gyeongbuk_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeongbuk_map)
+
 for wifi in gyeongnam_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gyeongnam_map)
+
 for wifi in jeju_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(jeju_map)
+
 for wifi in sejong_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(sejong_map)
-for wifi in kangwon_wifi:
-    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(kangwon_map)
+
+for wifi in gangwon_wifi:
+    folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gangwon_map)
+
 for wifi in busan_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(busan_map)
+
 for wifi in ulsan_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(ulsan_map)
+
 for wifi in daejeon_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(daejeon_map)
+
 for wifi in gwangju_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(gwangju_map)
+
 for wifi in incheon_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(incheon_map)
+
 for wifi in daegu_wifi:
     folium.Marker([wifi.lati, wifi.longi], popup=wifi.name).add_to(daegu_map)
-'''
 
-'''
+
+
+
 seoul_map.save("map/seoul_map.html")
 gyeonggi_map.save("map/gyeonggi_map.html")
 chungbuk_map.save("map/chungbuk_map.html")
@@ -233,24 +198,10 @@ gyeongbuk_map.save("map/gyeongbuk_map.html")
 gyeongnam_map.save("map/gyeongnam_map.html")
 jeju_map.save("map/jeju_map.html")
 sejong_map.save("map/sejong_map.html")
-kangwon_map.save("map/kangwon_map.html")
+gangwon_map.save("map/gangwon_map.html")
 busan_map.save("map/busan_map.html")
 ulsan_map.save("map/ulsan_map.html")
 daejeon_map.save("map/daejeon_map.html")
 gwangju_map.save("map/gwangju_map.html")
 incheon_map.save("map/incheon_map.html")
 daegu_map.save("map/daegu_map.html")
-'''
-'''
-file_data["map_dict"] = {'kangwon':kangwon_map, 'gyeonggi':gyeonggi_map, 'chungbuk':chungbuk_map, 'chungnam':chungnam_map,
-                         'jeonbuk':jeonbuk_map, 'gyeongbuk':gyeongbuk_map, 'gyeongnam':gyeongnam_map, 'jeonnam':jeonnam_map,
-                         'seoul':seoul_map, 'sejong':sejong_map, 'busan':busan_map, 'ulsan':ulsan_map, 'incheon':incheon_map,
-                         'daejeon':daejeon_map, 'daegu':daegu_map, 'gwangju':gwangju_map, 'jeju':jeju_map}
-print(json.dumps(file_data, ensure_ascii=False, indent="\t"))
-with open('data.json','w', encoding="utf-8") as make_file:
-    json.dump(file_data, make_file, ensure_ascii=False, indent="\t")
-'''
-# map_dict=[['kangwon',kangwon_map],   ['gyeonggi',gyeonggi_map],   ['chungbuk',chungbuk_map],   ['chungnam',chungnam_map],
-#           ['jeonbuk',jeonbuk_map],   ['gyeongbuk',gyeongbuk_map],   ['gyeongnam',gyeongnam_map],   ['jeonnam',jeonnam_map],
-#           ['seoul',seoul_map],   ['sejong',sejong_map],   ['busan',busan_map],   ['ulsan',ulsan_map],   ['incheon',incheon_map],
-#           ['daejeon',daejeon_map],   ['daegu',daegu_map],   ['gwangju',gwangju_map],   ['jeju',jeju_map]]
