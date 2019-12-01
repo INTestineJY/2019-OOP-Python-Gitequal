@@ -36,4 +36,7 @@ API에서의 도로명 주소를 좌표로 변환: 수영,
 
 ## 9. 기타
 
-
+## 실행방법
+1. 최초실행시 preprocess.py run하기
+2. Free_Wifi_Map.py 실행
+3. 이후 GUI에 나타난 textbox에 원하는 지역의 지역번호 입력
