@@ -1,8 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QDesktopWidget, QLabel, QLineEdit
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QCoreApplication
-
 
 class MyApp(QWidget):
 
@@ -12,6 +11,13 @@ class MyApp(QWidget):
         self.initUI()
 
     def initUI(self):
+        self.lbl = QLabel(self)
+        self.lbl.move(60, 40)
+
+        qle = QLineEdit(self)
+        qle.move(60, 100)
+        qle.textChanged[str].connect(self.onChanged)
+
 
         btn = QPushButton('Quit', self)
         btn.move(448, 260)
@@ -20,8 +26,21 @@ class MyApp(QWidget):
 
         self.setWindowTitle('MAP')
         self.setWindowIcon(QIcon('map.png'))
-        self.setGeometry(480, 270, 960, 540)
+        self.resize(960, 540)
         self.show()
+
+    def onChanged(self, text):
+        self.lbl.setText(text)
+        self.lbl.adjustSize()
+        print(text)
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
+
 
 
 if __name__ == '__main__':
