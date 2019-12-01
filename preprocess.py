@@ -22,7 +22,7 @@ from collections import OrderedDict
 file_data = OrderedDict()
 
 class free_wifi :
-    def __init__(self, name, latitude = 0, longitude = 0):
+    def __init__(self, name, latitude, longitude):
         self.name = name
         self.lati = latitude #lati는 위도 default 0
         self.longi = longitude #longi는 경도 default 0
