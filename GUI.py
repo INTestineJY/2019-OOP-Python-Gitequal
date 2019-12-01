@@ -3,8 +3,6 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QDesktopWidget, 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QCoreApplication
 
-
-
 class MyApp(QWidget):
 
     def __init__(self):
@@ -34,7 +32,6 @@ class MyApp(QWidget):
     def onChanged(self, text):
         self.lbl.setText(text)
         self.lbl.adjustSize()
-
         print(text)
 
     def center(self):
