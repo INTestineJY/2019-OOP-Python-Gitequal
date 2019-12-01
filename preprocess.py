@@ -215,6 +215,11 @@ file_data["map_dict"] = {'gangwon':gangwon_map, 'gyeonggi':gyeonggi_map, 'chungb
                          'seoul':seoul_map, 'sejong':sejong_map, 'busan':busan_map, 'ulsan':ulsan_map, 'incheon':incheon_map,
                          'daejeon':daejeon_map, 'daegu':daegu_map, 'gwangju':gwangju_map, 'jeju':jeju_map}
 
+print(json.dumps(file_data, ensure_ascii=False, indent="\t"))
+
+with open('data.json','w', encoding="utf-8") as make_file:
+    json.dump(file_data, make_file, ensure_ascii=False, indent="\t")
+
 # map_dict=[['gangwon',gangwon_map],   ['gyeonggi',gyeonggi_map],   ['chungbuk',chungbuk_map],   ['chungnam',chungnam_map],
 #           ['jeonbuk',jeonbuk_map],   ['gyeongbuk',gyeongbuk_map],   ['gyeongnam',gyeongnam_map],   ['jeonnam',jeonnam_map],
 #           ['seoul',seoul_map],   ['sejong',sejong_map],   ['busan',busan_map],   ['ulsan',ulsan_map],   ['incheon',incheon_map],
