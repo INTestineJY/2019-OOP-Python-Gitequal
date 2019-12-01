@@ -12,9 +12,9 @@ m = folium.Map([36.6, 128], zoom_start=8)
 
 #folium.Marker([45.01, 3.01], popup='여긴 어디').add_to(m)
 
-m.save("map.html")
+m.save("map/map.html")
 
-html_file='map.html'
+html_file='map/map.html'
 
 webbrowser.open(html_file)
 
