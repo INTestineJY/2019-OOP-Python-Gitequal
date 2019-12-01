@@ -77,3 +77,23 @@ if __name__ == '__main__':
 
 
 webbrowser.open(html_dict[Text])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 출처
+# PyQt5    :    http://codetorial.net/pyqt5/index.html
+# folium   :    https://dailyheumsi.tistory.com/85
+# csv      :    https://codeday.me/ko/qa/20190413/318480.html
+# open api :    1.https://www.data.go.kr/dataset/15013116/standard.do (전국무료와이파이표준데이터)
+
