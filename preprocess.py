@@ -15,7 +15,6 @@
 import csv
 import folium
 import requests
-import webbrowser
 
 class free_wifi :
     def __init__(self, name, latitude, longitude):
