@@ -1,41 +1,70 @@
 import sys
-import json
-from pprint import pprint
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+import webbrowser
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QDesktopWidget, QLabel, QLineEdit
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QCoreApplication
-html_dict = {'gangwon': map/gangwon_map.html, 'gyeonggi': map/gyeonggi_map.html,
-             'chungbuk': map/chungbuk_map.html, 'chungnam': map/chungnam_map.html,
-             'jeonbuk': map/jeonbuk_map.html, 'gyeongbuk': map/gyeongbuk_map.html,
-             'gyeongnam': map/gyeongnam_map.html, 'jeonnam': map/jeonnam_map.html,
-             'seoul': map/seoul_map.html, 'sejong': map/sejong_map.html,
-             'busan': map/busan_map.html, 'ulsan': map/ulsan_map.html,
-             'incheon': map/incheon_map.html, 'daejeon': map/daejeon_map.html,
-             'daegu': map/daegu_map.html, 'gwangju': map/gwangju_map.html,
-             'jeju': map/jeju_map.html}
 
 
-# with open('data.json') as data_file:
-#     data = json.load(data_file)
-#
-# pprint(data)
-# #값 하나하나씩 접근
-# data["map_dict"][0]['gangwon']
-# data["map_dict"][0]['gyeonggi']
-# data["map_dict"][0]['chungbuk']
-# data["map_dict"][0]['chungnam']
-# data["map_dict"][0]['jeonbuk']
-# data["map_dict"][0]['gyeongbuk']
-# data["map_dict"][0]['gyeongnam']
-# data["map_dict"][0]['jeonnam']
-# data["map_dict"][0]['seoul']
-# data["map_dict"][0]['sejong']
-# data["map_dict"][0]['busan']
-# data["map_dict"][0]['ulsan']
-# data["map_dict"][0]['incheon']
-# data["map_dict"][0]['daejeon']
-# data["map_dict"][0]['daegu']
-# data["map_dict"][0]['gwangju']
-# data["map_dict"][0]['jeju']
+html_dict = {'033': "map/gangwon_map.html", '031': "map/gyeonggi_map.html",
+             '043': "map/chungbuk_map.html", '041': "map/chungnam_map.html",
+             '063': "map/jeonbuk_map.html", '054': "map/gyeongbuk_map.html",
+             '055': "map/gyeongnam_map.html", '061': "map/jeonnam_map.html",
+             '02': "map/seoul_map.html", '044': "map/sejong_map.html",
+             '051': "map/busan_map.html", '052': "map/ulsan_map.html",
+             '032': "map/incheon_map.html", '042': "map/daejeon_map.html",
+             '053': "map/daegu_map.html", '062': "map/gwangju_map.html",
+             '064': "map/jeju_map.html"}
 
 
+Text = ""
+
+class MyApp(QWidget):
+
+    def __init__(self):
+        super().__init__()
+
+        self.initUI()
+
+    def initUI(self):
+        self.lbl = QLabel(self)
+        self.lbl.move(448, 40)
+
+        qle = QLineEdit(self)
+        qle.move(408, 300)
+        qle.textChanged[str].connect(self.onChanged)
+
+
+        btn = QPushButton('Enter', self)
+        btn.move(448, 400)
+        btn.resize(btn.sizeHint())
+        btn.clicked.connect(QCoreApplication.instance().quit)
+
+        self.setWindowTitle('MAP')
+        self.setWindowIcon(QIcon('map.png'))
+        self.resize(960, 540)
+        self.show()
+
+    def onChanged(self, text):
+        global Text
+        self.lbl.setText(text)
+        self.lbl.adjustSize()
+        print(text)
+        Text = text
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
+
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = MyApp()
+    app.exec()
+
+
+
+webbrowser.open(html_dict[Text])
