@@ -87,7 +87,6 @@ gwangju_map = folium.Map([35.126033, 126.831302], zoom_start=11)
 incheon_map = folium.Map([37.469221, 126.573234], zoom_start=11)
 daegu_map = folium.Map([35.798838, 128.583052], zoom_start=11)
 
-#region = [['서울특별시', 'seoul', seoul_wifi, seoul_map], ['경기도', 'gyeonggi', gyeonggi_wifi, gyeonggi_map], ['충청북도', 'chungbuk', chungbuk_wifi, chungbuk_map], ['충청남도', 'chungnam', chungnam_wifi, chungnam_map], ['전라남도', 'jeonnam', jeonnam_wifi, jeonnam_map], ['전라북도', 'jeonbuk', jeonbuk_wifi, jeonbuk_map], ['경상북도', gyeongbuk_wifi, gyeongbuk_map], ['경상남도', gyeongnam_wifi, gyeongnam_map], ['제주특별자치도', jeju_wifi, jeju_map], ['세종특별자치시', sejong_wifi, sejong_map], ['강원도', kangwon_wifi, kangwon_map], ['인천광역시', incheon_wifi, incheon_map], ['광주광역시', gwangju_wifi, gwangju_map], ['울산광역시', ulsan_wifi, ulsan_map], ['대구광역시', daegu_wifi, daegu_map], ['대전광역시', daejeon_wifi, daejeon_map], ['부산광역시', busan_wifi, busan_map]]
 
 region_list = []
 
