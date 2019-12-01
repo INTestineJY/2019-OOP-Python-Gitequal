@@ -66,5 +66,10 @@ if __name__ == '__main__':
     app.exec()
 
 
-
-webbrowser.open(html_dict[Text])
+try:
+    webbrowser.open(html_dict[Text])
+except KeyError:
+    if __name__ == '__main__':
+        app = QApplication(sys.argv)
+        ex = MyApp()
+        app.exec ()
