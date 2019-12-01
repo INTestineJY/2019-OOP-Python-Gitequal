@@ -49,6 +49,7 @@ def wifi_add(check, wifi_list, wifi):
     if wifi[2] == check :
         wifi_list.append(free_wifi(wifi[0], wifi[12], wifi[13]))
 
+#지역별 wifi 리스트 선언
 seoul_wifi = []
 gyeonggi_wifi = []
 chungbuk_wifi = []
@@ -67,6 +68,7 @@ incheon_wifi = []
 gwangju_wifi = []
 daejeon_wifi = []
 
+#지역별 map 선언
 seoul_map = folium.Map([37.540705, 126.956764], zoom_start=11)
 gyeonggi_map = folium.Map([37.567167, 127.190292], zoom_start=9)
 chungbuk_map = folium.Map([36.628503, 127.929344], zoom_start=9)
