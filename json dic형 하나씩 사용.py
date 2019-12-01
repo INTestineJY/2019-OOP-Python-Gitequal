@@ -1,8 +1,8 @@
-import json
+import json1
 from pprint import pprint
 
 with open('data.json') as data_file:
-    data = json.load(data_file)
+    data = json1.load(data_file)
 
 pprint(data) #data는 json 전체를 dictionary 형태로 저장하고 있음
 
